@@ -249,7 +249,7 @@ h1, h2, h3, h4 {
 }
 
 .brand img {
-  height: 34px;
+  height: 50px;
   width: auto;
 }
 
@@ -375,8 +375,8 @@ h1, h2, h3, h4 {
 }
 
 .hero-logo {
-  width: clamp(220px, 26vw, 320px);
-  margin-bottom: 2.2rem;
+  max-width: min(500px, 100%);
+  margin-bottom: 5.6rem;
 }
 
 .hero-content .eyebrow {
@@ -734,14 +734,15 @@ h1, h2, h3, h4 {
 
 .split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.75fr 1fr;
   gap: clamp(2rem, 6vw, 5rem);
   align-items: center;
 }
 
 .split-media {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1800 / 2961;
+  max-width: 380px;
   overflow: hidden;
   border: 1px solid var(--color-line);
   background: linear-gradient(150deg, var(--color-surface-2), var(--color-bg-alt));
