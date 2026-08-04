@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
 
 Sitemap: https://pabliitoxd.github.io/allmen/sitemap.xml

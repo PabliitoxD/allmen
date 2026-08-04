@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel de Peças — All Men (uso interno)</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+<header class="admin-header">
+  <div class="container">
+    <a href="../index.html" class="brand">
+      <span class="brand-word">ALL MEN</span>
+    </a>
+    <span class="admin-tag">Painel de Peças (uso interno)</span>
+  </div>
+</header>
+
+<main class="container admin-main">
+
+  <section class="admin-instructions">
+    <h1>Gerenciar o catálogo</h1>
+    <p>Use este painel para adicionar, editar ou remover peças do catálogo. Ele funciona só neste computador — quando terminar, siga os 3 passos abaixo para publicar as mudanças no site.</p>
+    <ol>
+      <li>Adicione/edite as peças na lista abaixo. Tudo fica salvo automaticamente neste navegador enquanto você trabalha.</li>
+      <li>Para cada peça com foto, clique em <strong>"Baixar imagem renomeada"</strong> depois de escolher o arquivo, e salve o download dentro de <code>assets/img/produtos/</code> (substituindo se já existir).</li>
+      <li>Clique em <strong>"Exportar catálogo"</strong>, salve o arquivo baixado substituindo <code>assets/data/products.js</code>, e me avise (ou peça pra mim) que eu publico no site.</li>
+    </ol>
+  </section>
+
+  <section class="admin-panel">
+    <h2 id="form-title">Adicionar peça</h2>
+    <form id="product-form" class="admin-form">
+      <div class="admin-form-row">
+        <label for="f-name">Nome da peça *</label>
+        <input type="text" id="f-name" required placeholder="Ex: Blazer Slim Cinza Chumbo">
+      </div>
+      <div class="admin-form-row">
+        <label for="f-category">Categoria *</label>
+        <select id="f-category" required>
+          <option value="">Selecione…</option>
+          <option value="alfaiataria">Alfaiataria</option>
+          <option value="camisaria">Camisaria</option>
+          <option value="casual">Casual Premium</option>
+          <option value="acessorios">Acessórios</option>
+        </select>
+      </div>
+      <div class="admin-form-row">
+        <label for="f-description">Descrição</label>
+        <textarea id="f-description" rows="2" placeholder="Ex: Corte slim, tecido premium com leve elastano."></textarea>
+      </div>
+      <div class="admin-form-row">
+        <label for="f-image-file">Foto da peça</label>
+        <input type="file" id="f-image-file" accept="image/*">
+        <p class="admin-hint">Escolher um arquivo aqui sugere o nome do arquivo e permite baixá-lo já renomeado, pronto para salvar em <code>assets/img/produtos/</code>.</p>
+        <div id="f-preview" class="admin-preview"></div>
+        <button type="button" id="f-download-renamed" class="btn btn-ghost" hidden>Baixar imagem renomeada</button>
+      </div>
+      <div class="admin-form-row">
+        <label for="f-image-path">Caminho da imagem</label>
+        <input type="text" id="f-image-path" placeholder="assets/img/produtos/nome-da-peca.jpg">
+        <p class="admin-hint">Preenchido automaticamente ao escolher uma foto acima, ou digite manualmente se a foto já estiver salva na pasta.</p>
+      </div>
+      <div class="admin-form-actions">
+        <button type="submit" id="f-submit" class="btn btn-primary">Adicionar peça</button>
+        <button type="button" id="f-cancel-edit" class="btn btn-ghost" hidden>Cancelar edição</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="admin-panel">
+    <div class="admin-list-head">
+      <h2>Peças no catálogo (<span id="product-count">0</span>)</h2>
+      <div class="admin-list-actions">
+        <label class="btn btn-ghost admin-file-btn">
+          Importar catálogo atual
+          <input type="file" id="import-input" accept=".js,.json" hidden>
+        </label>
+        <button type="button" id="export-btn" class="btn btn-primary">Exportar catálogo</button>
+      </div>
+    </div>
+    <p id="product-list-empty" class="admin-hint">Nenhuma peça ainda. Importe o catálogo atual do site ou adicione peças novas acima.</p>
+    <div id="product-list" class="admin-list"></div>
+    <button type="button" id="reset-btn" class="admin-reset">Limpar tudo e começar do zero</button>
+  </section>
+
+</main>
+
+<script src="admin.js"></script>
+</body>
+</html>
