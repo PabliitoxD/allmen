@@ -43,4 +43,31 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     revealEls.forEach((el) => el.classList.add("is-visible"));
   }
+
+  // Botão "voltar ao topo"
+  const backToTop = document.querySelector(".back-to-top");
+  if (backToTop) {
+    const toggleBackToTop = () => {
+      backToTop.classList.toggle("is-visible", window.scrollY > 600);
+    };
+    toggleBackToTop();
+    window.addEventListener("scroll", toggleBackToTop, { passive: true });
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  // Leve parallax no fundo do hero (o zoom Ken Burns fica na <img>, então o
+  // parallax é aplicado no container .hero-media para não competir pela
+  // mesma propriedade transform). Ignorado se o usuário prefere menos animação.
+  const heroMedia = document.querySelector(".hero-media");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (heroMedia && !prefersReducedMotion) {
+    const onHeroScroll = () => {
+      if (window.scrollY > window.innerHeight) return;
+      heroMedia.style.transform = `translateY(${window.scrollY * 0.08}px)`;
+    };
+    onHeroScroll();
+    window.addEventListener("scroll", onHeroScroll, { passive: true });
+  }
 });
