@@ -57,6 +57,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Alternância de tema claro/escuro (o tema inicial já foi aplicado por um
+  // script inline no <head>, antes do primeiro paint — aqui só cuidamos do
+  // clique e de acompanhar mudanças no tema do sistema operacional).
+  const themeToggle = document.querySelector(".theme-toggle");
+  if (themeToggle) {
+    const root = document.documentElement;
+    const systemPrefersLight = window.matchMedia("(prefers-color-scheme: light)");
+
+    const setTheme = (theme) => {
+      root.setAttribute("data-theme", theme);
+      themeToggle.setAttribute("aria-pressed", String(theme === "light"));
+    };
+
+    themeToggle.addEventListener("click", () => {
+      const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+      localStorage.setItem("allmen-theme", next);
+      setTheme(next);
+    });
+
+    // Se o usuário nunca escolheu manualmente, segue o tema do sistema em tempo real.
+    systemPrefersLight.addEventListener("change", (event) => {
+      if (!localStorage.getItem("allmen-theme")) {
+        setTheme(event.matches ? "light" : "dark");
+      }
+    });
+  }
+
   // Leve parallax no fundo do hero (o zoom Ken Burns fica na <img>, então o
   // parallax é aplicado no container .hero-media para não competir pela
   // mesma propriedade transform). Ignorado se o usuário prefere menos animação.
