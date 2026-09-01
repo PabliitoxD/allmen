@@ -2,6 +2,17 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<script>
+// Aplica o tema (claro/escuro) antes do primeiro paint, para não haver flash.
+// Prioridade: escolha manual salva > preferência do sistema/navegador > escuro.
+(function () {
+  try {
+    var saved = localStorage.getItem("allmen-theme");
+    var theme = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+    document.documentElement.setAttribute("data-theme", theme);
+  } catch (e) {}
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>All Men — Moda Masculina Sofisticada em Farroupilha, RS</title>
 <meta name="description" content="All Men é uma loja de moda masculina sofisticada em Farroupilha, RS. Alfaiataria, camisaria e peças casuais premium. Para todos os homens.">
@@ -10,7 +21,7 @@
 <meta name="theme-color" content="#0b0b0a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="All Men">
 <meta property="og:locale" content="pt_BR">
@@ -24,6 +35,7 @@
 <meta name="twitter:image" content="https://pabliitoxd.github.io/allmen/assets/img/logo.png">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/redesign.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,21 +74,60 @@
 }
 </script>
 </head>
-<body>
+<body class="layout-v2">
+
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <span class="topbar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-6.4-7-11.5A7 7 0 0 1 19 9.5C19 14.6 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+        Farroupilha/RS
+      </span>
+      <span class="topbar-sep">|</span>
+      <span class="topbar-item">Rua Independência, 582 - Sala 11</span>
+      <span class="topbar-sep">|</span>
+      <span class="topbar-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+        Seg a Sex: 9h às 19h
+      </span>
+      <span class="topbar-sep">|</span>
+      <span class="topbar-item">Sáb: 9h às 14h</span>
+    </div>
+    <a class="topbar-item" href="https://wa.me/5554996222619" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.5 8.5 0 1 1-3.8-7.1L21 3l-1.3 3.9a8.46 8.46 0 0 1 1.3 4.6z"/><path d="M8 10.5s.5 2 2 3.5 3.5 2 3.5 2"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</div>
 
 <header class="site-header">
   <div class="container">
     <a href="index.html" class="brand">
-      <img src="assets/img/logo-white.png" alt="All Men" onerror="this.style.display='none'">
+      <img class="brand-logo-light" src="assets/img/logo.png" alt="All Men" onerror="this.style.display='none'">
+      <img class="brand-logo-dark" src="assets/img/logo-white.png" alt="All Men" onerror="this.style.display='none'">
     </a>
     <nav class="main-nav">
       <a href="index.html" class="active">Início</a>
       <a href="sobre.html">Sobre</a>
-      <a href="colecoes.html">Coleções</a>
+      <a href="colecoes.html">Coleções
+        <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
       <a href="loja.html">A Loja</a>
+      <a href="https://wa.me/5554996222619" target="_blank" rel="noopener">Fale Conosco</a>
     </nav>
     <div class="header-cta">
-      <a href="https://wa.me/5554996222619" class="btn btn-ghost" target="_blank" rel="noopener">Fale Conosco</a>
+      <div class="header-icons">
+        <a class="icon-btn" href="https://www.instagram.com/allmenfarroupilha" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+        <a class="icon-btn" href="colecoes.html" aria-label="Buscar peças">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+        </a>
+        <button type="button" class="icon-btn theme-toggle" aria-label="Alternar tema claro/escuro" aria-pressed="false">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 0 0 11 11z"/></svg>
+        </button>
+      </div>
       <button class="nav-toggle" aria-label="Abrir menu">
         <span></span><span></span><span></span>
       </button>
@@ -84,45 +135,78 @@
   </div>
 </header>
 
-<section class="hero">
-  <div class="hero-media">
-    <img src="assets/img/loja-1.jpg" alt="Interior da loja All Men" onerror="this.style.display='none'">
-  </div>
-  <div class="hero-content">
-    <img class="hero-logo" src="assets/img/logo-white.png" alt="All Men" onerror="this.style.display='none'">
-    <span class="eyebrow">Alfaiataria &amp; Moda Masculina</span>
-    <h1>Elegância que veste cada <span class="accent-text">homem</span></h1>
-    <p class="tagline">para todos os homens</p>
-    <p class="lede">Peças cuidadosamente selecionadas, atendimento próximo e um estilo que não segue tendência — cria a sua.</p>
-    <div class="hero-actions">
-      <a href="colecoes.html" class="btn btn-primary">Ver Coleções</a>
-      <a href="loja.html" class="btn btn-ghost">Visitar a Loja</a>
+<section class="hero-split">
+  <div class="hero-split-inner">
+    <div class="hero-split-text reveal">
+      <h1>Você não precisa entender de roupa para comprar bem.</h1>
+      <p class="lede">Peças que funcionam juntas e uma equipe que ajuda você a escolher.</p>
+      <div class="hero-split-actions">
+        <a href="colecoes.html" class="btn btn-primary">Ver Coleções</a>
+        <a href="loja.html" class="btn btn-ghost">Visitar a Loja</a>
+      </div>
     </div>
-  </div>
-  <div class="scroll-cue">
-    <span>Explorar</span>
-    <span class="line"></span>
+    <div class="hero-split-media reveal">
+      <img src="assets/img/loja-1.jpg" alt="Interior da loja All Men" onerror="this.style.display='none'">
+    </div>
   </div>
 </section>
 
 <section class="section">
-  <div class="container">
-    <div class="quote-block reveal">
-      <blockquote>&ldquo;Vestir bem não é sobre seguir regras — é sobre carregar presença em cada detalhe.&rdquo;</blockquote>
-      <cite>Filosofia All Men</cite>
+  <div class="container split-section">
+    <div class="intro reveal">
+      <h2>Uma calça, três combinações.</h2>
+      <p>Trocar a parte de cima já muda o caminho da mesma peça.</p>
+    </div>
+    <div class="combo-grid reveal">
+      <div class="combo-card photo-pending">
+        <div class="media">
+          <div class="placeholder-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.2"/><path d="M8 6l1.2-2h5.6L16 6"/></svg>
+            <span>Foto em produção</span>
+          </div>
+        </div>
+        <div class="body">
+          <h3>Trabalho</h3>
+          <p>Calça + Polo</p>
+        </div>
+      </div>
+      <div class="combo-card photo-pending">
+        <div class="media">
+          <div class="placeholder-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.2"/><path d="M8 6l1.2-2h5.6L16 6"/></svg>
+            <span>Foto em produção</span>
+          </div>
+        </div>
+        <div class="body">
+          <h3>Fim de Semana</h3>
+          <p>Calça + Camiseta</p>
+        </div>
+      </div>
+      <div class="combo-card photo-pending">
+        <div class="media">
+          <div class="placeholder-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.2"/><path d="M8 6l1.2-2h5.6L16 6"/></svg>
+            <span>Foto em produção</span>
+          </div>
+        </div>
+        <div class="body">
+          <h3>Jantar</h3>
+          <p>Calça + Camisa</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section section-alt">
-  <div class="container">
-    <div class="section-head center reveal">
-      <span class="eyebrow" style="justify-content:center">Coleções</span>
-      <h2>Vestindo cada ocasião</h2>
-      <p>Do essencial ao sob medida — encontre a peça certa para o seu momento.</p>
+<section class="section">
+  <div class="container split-section colecoes-split">
+    <div class="intro reveal">
+      <span class="eyebrow">Coleções</span>
+      <h2>Vestindo cada ocasião.</h2>
+      <p>Do clássico ao casual, peças selecionadas para acompanhar sua rotina.</p>
     </div>
-    <div class="grid grid-4">
-      <a href="colecoes.html#alfaiataria" class="feature-card reveal">
+    <div class="grid grid-4 reveal">
+      <a href="colecoes.html#alfaiataria" class="feature-card">
         <div class="bg"><img src="assets/img/colecao-alfaiataria.jpg" alt="Alfaiataria All Men" onerror="this.remove()"></div>
         <div class="content">
           <span class="cat">01</span>
@@ -130,7 +214,7 @@
           <span class="go">Explorar &rarr;</span>
         </div>
       </a>
-      <a href="colecoes.html#camisaria" class="feature-card reveal">
+      <a href="colecoes.html#camisaria" class="feature-card">
         <div class="bg"><img src="assets/img/colecao-camisaria.jpg" alt="Camisaria All Men" onerror="this.remove()"></div>
         <div class="content">
           <span class="cat">02</span>
@@ -138,7 +222,7 @@
           <span class="go">Explorar &rarr;</span>
         </div>
       </a>
-      <a href="colecoes.html#casual" class="feature-card reveal">
+      <a href="colecoes.html#casual" class="feature-card">
         <div class="bg"><img src="assets/img/colecao-casual.jpg" alt="Casual Premium All Men" onerror="this.remove()"></div>
         <div class="content">
           <span class="cat">03</span>
@@ -146,7 +230,7 @@
           <span class="go">Explorar &rarr;</span>
         </div>
       </a>
-      <a href="colecoes.html#acessorios" class="feature-card reveal">
+      <a href="colecoes.html#acessorios" class="feature-card">
         <div class="bg"><img src="assets/img/colecao-acessorios.jpg" alt="Acessórios All Men" onerror="this.remove()"></div>
         <div class="content">
           <span class="cat">04</span>
@@ -155,6 +239,9 @@
         </div>
       </a>
     </div>
+  </div>
+  <div style="text-align:center; margin-top:3rem;" class="reveal">
+    <a href="colecoes.html" class="btn btn-ghost">Explorar Coleções</a>
   </div>
 </section>
 
@@ -167,9 +254,8 @@
       </div>
       <div class="split-text reveal">
         <span class="eyebrow">Nossa Loja</span>
-        <h2>Um espaço pensado para cada detalhe</h2>
-        <p>Na All Men, cada visita é uma experiência de atendimento próximo e curadoria cuidadosa. Nosso time está pronto para ajudar você a encontrar peças que combinam com o seu estilo e a sua rotina.</p>
-        <p>Venha nos visitar e sinta a diferença de vestir bem.</p>
+        <h2>Um espaço pensado para cada detalhe.</h2>
+        <p>Ambiente acolhedor, atendimento próximo e peças que combinam com o seu estilo e com a sua rotina.</p>
         <a href="loja.html" class="btn btn-primary" style="margin-top:1.6rem">Ver Localização</a>
       </div>
     </div>
@@ -180,44 +266,52 @@
   <div class="container">
     <div class="section-head center reveal">
       <span class="eyebrow" style="justify-content:center">Por que All Men</span>
-      <h2>Feito para o homem de hoje</h2>
+      <h2>Escolhas que fazem a diferença no seu dia.</h2>
     </div>
-    <div class="grid grid-3">
-      <div class="value reveal">
-        <div class="icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l2.4 6.9L22 9.3l-5.6 4.9L18 22l-6-4-6 4 1.6-7.8L2 9.3l7.6-.4z"/></svg>
+    <div class="diff-grid">
+      <div class="diff-card reveal photo-pending">
+        <div class="media">
+          <div class="placeholder-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.2"/><path d="M8 6l1.2-2h5.6L16 6"/></svg>
+            <span>Foto em produção</span>
+          </div>
         </div>
-        <h3>Curadoria Premium</h3>
-        <p>Selecionamos tecidos e cortes com atenção a cada detalhe, priorizando qualidade e durabilidade.</p>
+        <h3>Algodão Peruano</h3>
+        <p>Toque macio, caimento que valoriza e conforto que dura o dia todo.</p>
       </div>
-      <div class="value reveal">
-        <div class="icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21c-4-3-8-6.5-8-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 4.5-4 8-8 11z"/></svg>
+      <div class="diff-card reveal photo-pending">
+        <div class="media">
+          <div class="placeholder-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.2"/><path d="M8 6l1.2-2h5.6L16 6"/></svg>
+            <span>Foto em produção</span>
+          </div>
         </div>
-        <h3>Atendimento Personalizado</h3>
-        <p>Consultoria de estilo feita sob medida para o seu corpo, sua rotina e o seu momento.</p>
+        <h3>Modelagem Inteligente</h3>
+        <p>Ajustes pensados para melhor caimento e liberdade de movimento.</p>
       </div>
-      <div class="value reveal">
-        <div class="icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+      <div class="diff-card reveal photo-pending">
+        <div class="media">
+          <div class="placeholder-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.2"/><path d="M8 6l1.2-2h5.6L16 6"/></svg>
+            <span>Foto em produção</span>
+          </div>
         </div>
-        <h3>Elegância Atemporal</h3>
-        <p>Peças que atravessam estações — um guarda-roupa que se constrói, não se descarta.</p>
+        <h3>Peças que Conversam</h3>
+        <p>Terceiras peças que completam o look e ampliam as possibilidades.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="cta-band">
-  <div class="container">
-    <div class="reveal">
-      <span class="eyebrow" style="justify-content:center">Vem conhecer</span>
+<section class="cta-band cta-ink">
+  <div class="container cta-ink-inner">
+    <div class="cta-ink-text reveal">
       <h2>Sua próxima peça favorita está a uma visita de distância</h2>
-      <p>Fale com a gente no WhatsApp ou venha até a loja tomar um café.</p>
-      <div class="hero-actions">
-        <a href="https://wa.me/5554996222619" class="btn btn-primary" target="_blank" rel="noopener">Falar no WhatsApp</a>
-        <a href="colecoes.html" class="btn btn-ghost">Ver Coleções</a>
-      </div>
+      <p>Fale com a equipe pelo WhatsApp ou venha tomar um café na loja.</p>
+    </div>
+    <div class="hero-actions reveal">
+      <a href="https://wa.me/5554996222619" class="btn btn-primary" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <a href="loja.html" class="btn btn-ghost">Visitar a Loja</a>
     </div>
   </div>
 </section>
@@ -229,16 +323,13 @@
         <span class="brand">
           <img src="assets/img/logo-white.png" alt="All Men" onerror="this.style.display='none'">
         </span>
-        <p>Alfaiataria e moda masculina com elegância atemporal.<br>Para todos os homens.</p>
+        <p>Moda masculina para diferentes momentos de sua rotina. Peças que combinam entre si e uma equipe para ajudar você a escolher.</p>
         <div class="footer-social">
-          <a href="https://www.instagram.com/allmenfarroupilha" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
-          </a>
-          <a href="https://wa.me/5554996222619" target="_blank" rel="noopener" aria-label="WhatsApp">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.5 8.5 0 1 1-3.8-7.1L21 3l-1.3 3.9a8.46 8.46 0 0 1 1.3 4.6z"/><path d="M8 10.5s.5 2 2 3.5 3.5 2 3.5 2"/></svg>
-          </a>
           <a href="https://www.facebook.com/Allmenfarropilha" target="_blank" rel="noopener" aria-label="Facebook">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 8h2V5h-2c-1.7 0-3 1.3-3 3v2H9v3h2v7h3v-7h2.2l.8-3H14V8z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/allmenfarroupilha" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
           </a>
         </div>
       </div>
@@ -249,6 +340,7 @@
           <li><a href="sobre.html">Sobre</a></li>
           <li><a href="colecoes.html">Coleções</a></li>
           <li><a href="loja.html">A Loja</a></li>
+          <li><a href="https://wa.me/5554996222619" target="_blank" rel="noopener">Fale Conosco</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -263,15 +355,20 @@
       <div class="footer-col">
         <h4>Contato</h4>
         <ul>
-          <li><a href="loja.html">Endereço da loja</a></li>
-          <li><a href="tel:+5554996222619">(54) 99622-2619</a></li>
-          <li><a href="https://www.facebook.com/Allmenfarropilha" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="loja.html">Rua Independência, 582<br>Sala 11 - Centro<br>Farroupilha/RS</a></li>
+          <li><a href="tel:+5554996222619">(54) 9 9914-2607</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Horários</h4>
+        <ul>
+          <li>Seg a Sex: 9h às 19h</li>
+          <li>Sáb: 9h às 14h</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 All Men. Todos os direitos reservados.</span>
-      <span>para todos os homens</span>
+      <span>&copy; 2026 All Men Alfaiataria &amp; Moda Masculina. Todos os direitos reservados.</span>
     </div>
   </div>
 </footer>
